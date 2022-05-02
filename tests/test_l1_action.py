@@ -25,7 +25,7 @@ def test_is_valid():
         account, contract = deploy_contract()
 
         # Using and old deployed cairo program
-        program_hash=hex(0xc31e4da4b646e6661e98d893161cb4341f37403e48840c90ef4b76952f50d4   )
+        program_hash=hex(0xc31e4da4b646e6661e98d893161cb4341f37403e48840c90ef4b76952f50d4)
         tx = contract.updateCairoProgramHash(program_hash,{"from": account})
         tx.wait(1)
 

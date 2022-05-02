@@ -14,13 +14,13 @@ contract L1Action
 
 
     // Cairo version/hash
-    bytes32 public cairoProgramHash=0x0; 
+    uint256  public cairoProgramHash=0x0; 
 
     // Event confirming proper execution
-    event ActionExecuted(bytes32 cairoProgramHash, uint256[] cairoProgramOutput);
+    event ActionExecuted(uint256 cairoProgramHash, uint256[] cairoProgramOutput);
 
     // TODO: add Owner as only Admins should be able to change Cairo program hash
-    function updateCairoProgramHash(bytes32 _cairoProgramHash) external {
+    function updateCairoProgramHash(uint256 _cairoProgramHash) external {
         cairoProgramHash = _cairoProgramHash;
     }
 
