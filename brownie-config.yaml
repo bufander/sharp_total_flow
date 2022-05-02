@@ -1,0 +1,14 @@
+compiler:
+  solc:
+    version: 0.8.13
+dotenv: .env
+networks:
+  default: goerli
+  goerli:
+    verify: True
+  development:
+    verify: False
+  goerli-fork:
+    verify: False
+wallets:
+  from_key: ${PRIVATE_KEY}
