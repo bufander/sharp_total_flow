@@ -1,7 +1,8 @@
 from scripts.deploy import deploy_contract
 from brownie import L1Action
-from brownie import network, exceptions
+from brownie import network, exceptions, chain
 import pytest
+import time
 
 
 
@@ -29,6 +30,12 @@ def test_is_valid():
         tx = contract.updateCairoProgramHash(program_hash,{"from": account})
         tx.wait(1)
 
+        # Ask for inputs
+        tx = contract.get_inputs({"from": account})
+        tx.wait(1)
+        inputs = tx.return_value
+        assert inputs==[1,40]
+
         # Execute action by verifying
         program_output = [1,40,41]
         tx = contract.execute_action(program_output)
@@ -44,3 +51,18 @@ def test_is_valid():
     
         
 
+def test_get_inputs():
+    account, contract = deploy_contract()
+
+    # Using and old deployed cairo program
+    program_hash=hex(0xc31e4da4b646e6661e98d893161cb4341f37403e48840c90ef4b76952f50d4)
+    tx = contract.updateCairoProgramHash(program_hash,{"from": account})
+    tx.wait(1)
+
+    # Ask for inputs
+    tx = contract.get_inputs({"from": account})
+    tx.wait(1)
+
+    inputs = tx.return_value
+
+    assert inputs==[1,40]
